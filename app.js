@@ -185,128 +185,128 @@ app.post('/getkundl',(req,res)=>{
 // });
 
 
-// app.post('/get_yogini_antar_dasha', (req, res) => {
+app.post('/get_yogini_antar_dasha', (req, res) => {
     
-//   const planete2 = req.body.plant_2;
+  const planete2 = req.body.plant_2;
   
-//   const planete1 = req.body.plante_1;
+  const planete1 = req.body.plante_1;
   
-//   const dasha1 = "maha_dasha";
+  const dasha1 = "maha_dasha";
   
-//   const dasha2 = "antar_dasha";
+  const dasha2 = "antar_dasha";
   
-//   const json = req.body.json;
+  const json = req.body.json;
 
-//   let satas = json;
+  let satas = json;
   
-//   try {
-//     satas = JSON.parse(json);
-//   } catch (error) {
-//     return res.status(400).send(error);
-//   }
+  try {
+    satas = JSON.parse(json);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
 
-//   let responseHtml = '';
-//   if (satas.data && satas.data[dasha1] && satas.data[dasha1][planete1] && satas.data[dasha1][planete1][dasha2]) {
-//     const data = satas.data[dasha1][planete1][dasha2];
-//     for (const [key, value] of Object.entries(data)) {
-//       responseHtml += `<tr class="yoginii_antar_dasha_data"><td>${planete2.substring(0, 2)}-${key}</td><td>${value}</td></tr>`;
-//     }
-//   }
-// res.send(responseHtml);
+  let responseHtml = '';
+  if (satas.data && satas.data[dasha1] && satas.data[dasha1][planete1] && satas.data[dasha1][planete1][dasha2]) {
+    const data = satas.data[dasha1][planete1][dasha2];
+    for (const [key, value] of Object.entries(data)) {
+      responseHtml += `<tr class="yoginii_antar_dasha_data"><td>${planete2.substring(0, 2)}-${key}</td><td>${value}</td></tr>`;
+    }
+  }
+res.send(responseHtml);
   
-// });
+});
 
 
-// app.post('/get_kudli_antar_dasha', (req, res) => {
-//     const plant1 = req.body.plant_1;
-//     const dasha1 = req.body.dasha_1;
-//     const dasha2 = req.body.dasha_2;
-//     const json = req.body.json;
+app.post('/get_kudli_antar_dasha', (req, res) => {
+    const plant1 = req.body.plant_1;
+    const dasha1 = req.body.dasha_1;
+    const dasha2 = req.body.dasha_2;
+    const json = req.body.json;
 
-//     let satas;
-//     try {
-//         satas = JSON.parse(json);
-//     } catch (error) {
-//         return res.status(400).send('Invalid JSON');
-//     }
+    let satas;
+    try {
+        satas = JSON.parse(json);
+    } catch (error) {
+        return res.status(400).send('Invalid JSON');
+    }
 
-//     let responseHtml = '';
-//     if (satas.data && satas.data[dasha1] && satas.data[dasha1][plant1] && satas.data[dasha1][plant1][dasha2]) {
-//         const data = satas.data[dasha1][plant1][dasha2];
-//         for (const [key, value] of Object.entries(data)) {
-//             responseHtml += `
-//                 <tr class="antar_dasha_hide">
-//                     <td>${plant1.substring(0, 2)}-${key}</td>
-//                     <td>${value.start_time}</td>
-//                     <td>${value.end_time} <i onclick="pratyantar_dasha('${key}')" class="fa fa-arrow-right"></i></td>
-//                 </tr>`;
-//         }
-//     }
+    let responseHtml = '';
+    if (satas.data && satas.data[dasha1] && satas.data[dasha1][plant1] && satas.data[dasha1][plant1][dasha2]) {
+        const data = satas.data[dasha1][plant1][dasha2];
+        for (const [key, value] of Object.entries(data)) {
+            responseHtml += `
+                <tr class="antar_dasha_hide">
+                    <td>${plant1.substring(0, 2)}-${key}</td>
+                    <td>${value.start_time}</td>
+                    <td>${value.end_time} <i onclick="pratyantar_dasha('${key}')" class="fa fa-arrow-right"></i></td>
+                </tr>`;
+        }
+    }
 
-//     res.send(responseHtml);
-// });
+    res.send(responseHtml);
+});
 
-// app.post('/get_kudli_pratyantar_dasha', (req, res) => {
-//     const { plant_1, dasha_1, dasha_2, dasha_3, plant_2, json } = req.body;
+app.post('/get_kudli_pratyantar_dasha', (req, res) => {
+    const { plant_1, dasha_1, dasha_2, dasha_3, plant_2, json } = req.body;
 
-//     let satas;
-//     try {
-//         satas = JSON.parse(json);
-//     } catch (error) {
-//         return res.status(400).send('Invalid JSON');
-//     }
+    let satas;
+    try {
+        satas = JSON.parse(json);
+    } catch (error) {
+        return res.status(400).send('Invalid JSON');
+    }
 
-//     let responseHtml = '';
-//     if (satas.data && satas.data[dasha_1] && satas.data[dasha_1][plant_1] && 
-//         satas.data[dasha_1][plant_1][dasha_2] && satas.data[dasha_1][plant_1][dasha_2][plant_2] && 
-//         satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3]) {
+    let responseHtml = '';
+    if (satas.data && satas.data[dasha_1] && satas.data[dasha_1][plant_1] && 
+        satas.data[dasha_1][plant_1][dasha_2] && satas.data[dasha_1][plant_1][dasha_2][plant_2] && 
+        satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3]) {
         
-//         const data = satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3];
+        const data = satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3];
         
-//         for (const [key, value] of Object.entries(data)) {
-//             responseHtml += `
-//                 <tr class="pratyantar_dasha_hide">
-//                     <td>${plant_1.substring(0, 2)}-${plant_2.substring(0, 2)}-${key}</td>
-//                     <td>${value.start_time}</td>
-//                     <td>${value.end_time} <i onclick="sookshma_dasha('${key}')" class="fa fa-arrow-right"></i></td>
-//                 </tr>`;
-//         }
-//     }
+        for (const [key, value] of Object.entries(data)) {
+            responseHtml += `
+                <tr class="pratyantar_dasha_hide">
+                    <td>${plant_1.substring(0, 2)}-${plant_2.substring(0, 2)}-${key}</td>
+                    <td>${value.start_time}</td>
+                    <td>${value.end_time} <i onclick="sookshma_dasha('${key}')" class="fa fa-arrow-right"></i></td>
+                </tr>`;
+        }
+    }
 
-//     res.send(responseHtml);
-// });
+    res.send(responseHtml);
+});
 
-// app.post('/get_kudli_sookshma_dasha', (req, res) => {
-//     const { plant_1, dasha_1, dasha_2, dasha_3, dasha_4, plant_2, plant_3, json } = req.body;
+app.post('/get_kudli_sookshma_dasha', (req, res) => {
+    const { plant_1, dasha_1, dasha_2, dasha_3, dasha_4, plant_2, plant_3, json } = req.body;
 
-//     let satas;
-//     try {
-//         satas = JSON.parse(json);
-//     } catch (error) {
-//         return res.status(400).send('Invalid JSON');
-//     }
+    let satas;
+    try {
+        satas = JSON.parse(json);
+    } catch (error) {
+        return res.status(400).send('Invalid JSON');
+    }
 
-//     let responseHtml = '';
-//     if (satas.data && satas.data[dasha_1] && satas.data[dasha_1][plant_1] &&
-//         satas.data[dasha_1][plant_1][dasha_2] && satas.data[dasha_1][plant_1][dasha_2][plant_2] &&
-//         satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3] && 
-//         satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3][plant_3] &&
-//         satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3][plant_3][dasha_4]) {
+    let responseHtml = '';
+    if (satas.data && satas.data[dasha_1] && satas.data[dasha_1][plant_1] &&
+        satas.data[dasha_1][plant_1][dasha_2] && satas.data[dasha_1][plant_1][dasha_2][plant_2] &&
+        satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3] && 
+        satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3][plant_3] &&
+        satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3][plant_3][dasha_4]) {
         
-//         const data = satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3][plant_3][dasha_4];
+        const data = satas.data[dasha_1][plant_1][dasha_2][plant_2][dasha_3][plant_3][dasha_4];
         
-//         for (const [key, value] of Object.entries(data)) {
-//             responseHtml += `
-//                 <tr class="sookshma_dasha_hide">
-//                     <td>${plant_1.substring(0, 2)}-${plant_2.substring(0, 2)}-${plant_3.substring(0, 2)}-${key}</td>
-//                     <td>${value.start_time}</td>
-//                     <td>${value.end_time}</td>
-//                 </tr>`;
-//         }
-//     }
+        for (const [key, value] of Object.entries(data)) {
+            responseHtml += `
+                <tr class="sookshma_dasha_hide">
+                    <td>${plant_1.substring(0, 2)}-${plant_2.substring(0, 2)}-${plant_3.substring(0, 2)}-${key}</td>
+                    <td>${value.start_time}</td>
+                    <td>${value.end_time}</td>
+                </tr>`;
+        }
+    }
 
-//     res.send(responseHtml);
-// });
+    res.send(responseHtml);
+});
 
 
 
