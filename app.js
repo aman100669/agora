@@ -5,30 +5,33 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 var bodyParser = require("body-parser");
+const {join} = require('path');
 const {RtcTokenBuilder, RtcRole} = require('agora-access-token');
-
 app.set('view engine', 'ejs');
 
 dotenv.config();
 // app.use(bodyParser.json());
 app.use(bodyParser.json({limit: '900kb'}));
 
+app.use(express.static(__dirname + '../public'));
 
 const port = process.env.PORT
 
 const APP_ID = process.env.APP_ID;
 const APP_CERTIFICATE = process.env.APP_CERTIFICATE;
 
-
 const nocache = (_, resp, next) => {
   resp.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
   resp.header('Expires', '-1');
   resp.header('Pragma', 'no-cache');
   next();
-} 
+}
+
+
 
 const ping = (req, resp) => {
   resp.send({message: 'pong'});
+
 }
 
 const generateRTCToken = (req, resp) => {
@@ -124,6 +127,8 @@ const generateRTCTokenBody = (req, resp) => {
 }
 
 
+
+
 app.options('*', cors());
 
 app.get('/ping', nocache, ping);
@@ -141,23 +146,31 @@ app.get('/fetch_rtc_token_for_get', nocache , generateRTCTokenBody);
 // });
 
 app.get('/',(req,res)=>{
-  res.send("hello");
+  res.render('../views/frontend/home_page');
+});
+
+app.get('/astro-call/:uid/:channelName',(req,res)=>{
+  res.render('../views/frontend/audioCall/astro_side');
+});
+
+app.get('/user-call/:uid/:channelName',(req,res)=>{
+  res.render('../views/frontend/audioCall/user_side');
 });
 
 app.get('/astro/:uid/:channelName',(req,res)=>{
-    res.render('../views/astrologer_video_call');
+    res.render('../views/frontend/astrologer_video_call');
 });
 
 app.get('/user/:uid/:channelName',(req,res)=>{
-    res.render('../views/user_video_call');
+    res.render('../views/frontend/user_video_call');
 });
 
 app.get('/webinar/:astro/:id',(req,res)=>{
-  res.render('../views/webinar/astro_page');
+  res.render('../views/frontend/webinar/astro_page');
 });
 
 app.get('/webinar/:astro/:id/user',(req,res)=>{
-  res.render('../views/webinar/user_page');
+  res.render('../views/frontend/webinar/user_page');
 });
 
 // app.get('/astroera/astro/:uid/:channelName',(req,res)=>{
@@ -168,14 +181,26 @@ app.get('/webinar/:astro/:id/user',(req,res)=>{
 
 app.get('/astroera/:channelName',(req,res)=>{
     
-    res.sendFile(path.join(__dirname, 'views/kundali/kundali.html'));
+    res.sendFile(path.join(__dirname, 'views/frontend/kundali/kundali.html'));
     
 });
 
 app.post('/getkundl',(req,res)=>{
     
-    res.sendFile(path.join(__dirname, 'views/kundali/kundali.html'));
+    res.sendFile(path.join(__dirname, 'views/frontend/kundali/kundali.html'));
     
+});
+
+app.post('/getmatchmaking',(req,res)=>{
+
+    res.sendFile(path.join(__dirname, 'views/frontend/kundali/match_kundali.html'));
+
+});
+
+app.get('/match',(req,res)=>{
+
+    res.send("hello from match 123");
+
 });
 
 // app.get('/astroera/:uid/:channelName',(req,res)=>{
@@ -306,6 +331,19 @@ app.post('/get_kudli_sookshma_dasha', (req, res) => {
     }
 
     res.send(responseHtml);
+});
+
+
+app.get('/user-webinar/:uid/:channelName',(req,res)=>{
+    
+  res.render('../views/frontend/webinar/user_side_webinar');
+  
+});
+
+app.get('/astro-webinar/:uid/:channelName',(req,res)=>{
+  
+res.render('../views/frontend/webinar/astro_side_webinar');
+
 });
 
 
